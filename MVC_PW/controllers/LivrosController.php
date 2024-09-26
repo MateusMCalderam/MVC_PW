@@ -35,7 +35,15 @@ final class LivrosController extends Controller {
     public function save() {
         print_r($_POST);
         $id = $_POST["id"];
-        $vo = new LivrosVO($id, $_POST["titulo"]);
+        $vo = new LivrosVO(
+            $_POST["id"],
+            $_POST["titulo"],
+            $_POST["autores"],
+            $_POST["editora"],
+            $_POST["ano_publicacao"],
+            $_POST["quantidade_exemplares"],
+            $_POST["isbn"]
+        );
         
         $model = new LivrosModel();
         
@@ -44,7 +52,7 @@ final class LivrosController extends Controller {
         }else{
             $result = $model->update($vo);
         }
-        echo $result;
+        var_dump($result)   ;
         $this->redirect("index.php");
 
     }
