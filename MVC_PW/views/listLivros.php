@@ -8,6 +8,7 @@
 <body>
     <h1>Listagem de Livros</h1>
     <a href="livro.php">Incluir Nova</a>
+    <a href="./alunos.php">Ver Alunos</a>
     
     <?php if (empty($livros)): ?>
         <p>Nenhum livro adicionado!</p>
