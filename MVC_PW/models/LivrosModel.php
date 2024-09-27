@@ -35,7 +35,6 @@ final class LivrosModel extends Model {
         $binds = [":id" => $vo->getId()];
         $data = $db->select($query, $binds);
 
-        // Adaptado para capturar todos os campos de um único livro
         return new LivrosVO(
             $data[0]["id"], 
             $data[0]["titulo"], 

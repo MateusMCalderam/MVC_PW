@@ -8,17 +8,22 @@ final class AlunosVO extends VO {
     private $data_nasc;
     private $id_curso;
     private $cpf;
+    private $nome_curso;
     
-    public function __construct($id = 0, $nome = "", $data_nasc = null, $id_curso = 0, $cpf = "") {
+    public function __construct($id = 0, $nome = "", $data_nasc = null, $id_curso = 0, $cpf = "", $nome_curso = "") {
         parent::__construct($id);
         $this->nome = $nome;
         $this->data_nasc = $data_nasc;
         $this->id_curso = $id_curso;
         $this->cpf = $cpf;
+        $this->nome_curso = $nome_curso;
     }
 
     public function getNome() {
         return $this->nome;
+    }
+    public function getNomeCurso() {
+        return $this->nome_curso;
     }
 
     public function getDataNasc() {
@@ -37,6 +42,10 @@ final class AlunosVO extends VO {
         $this->nome = $nome;
     }
 
+    public function setNomeCurso($nome_curso) {
+        $this->nome_curso = $nome_curso;
+    }
+    
     public function setDataNasc($data_nasc) {
         $this->data_nasc = $data_nasc;
     }

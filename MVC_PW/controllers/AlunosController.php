@@ -33,18 +33,16 @@ final class AlunosController extends Controller {
     }
 
     public function save() {
-        print_r($_POST);
         $id = $_POST["id"];
         $vo = new AlunosVO(
             $_POST["id"],
-            $_POST["titulo"],
-            $_POST["autores"],
-            $_POST["editora"],
-            $_POST["ano_publicacao"],
-            $_POST["quantidade_exemplares"],
-            $_POST["isbn"]
+            $_POST["nome"],
+            $_POST["data_nasc"],
+            $_POST["id_curso"],
+            $_POST["cpf"]
         );
         
+        print_r($vo);
         $model = new AlunosModel();
         
         if(empty($id)) {
@@ -53,7 +51,7 @@ final class AlunosController extends Controller {
             $result = $model->update($vo);
         }
         var_dump($result)   ;
-        $this->redirect("index.php");
+        $this->redirect("alunos.php?destino=list");
 
     }
 
@@ -62,7 +60,7 @@ final class AlunosController extends Controller {
         $model = new AlunosModel();
         $result = $model->delete($vo);
 
-        $this->redirect("index.php");
+        $this->redirect("alunos.php?destino=list");
     }
 
 }

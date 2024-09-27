@@ -8,7 +8,8 @@ final class AlunosModel extends Model {
 
     public function selectAll($vo) {
         $db = new Database();
-        $query = "SELECT * FROM alunos";
+        $query = "SELECT a.id, a.nome, a.data_nasc, a.id_curso, a.cpf, c.nome as nome_curso FROM alunos a
+        JOIN cursos c ON a.id_curso = c.id";
         $data = $db->select($query);
 
         $arrayDados = [];
@@ -19,7 +20,8 @@ final class AlunosModel extends Model {
                 $row["nome"], 
                 $row["data_nasc"], 
                 $row["id_curso"], 
-                $row["cpf"]
+                $row["cpf"],
+                $row["nome_curso"]   
             );
             array_push($arrayDados, $vo);
         }
@@ -29,17 +31,18 @@ final class AlunosModel extends Model {
 
     public function selectOne($vo) {
         $db = new Database();
-        $query = "SELECT * FROM alunos WHERE id = :id";
+        $query = "SELECT a.id, a.nome, a.data_nasc, a.id_curso, a.cpf, c.nome as nome_curso FROM alunos a
+        JOIN cursos c ON a.id_curso = c.id WHERE a.id = :id";
         $binds = [":id" => $vo->getId()];
         $data = $db->select($query, $binds);
 
-        // Adaptado para capturar todos os campos de um único livro
         return new AlunosVO(
-            $row[0]["id"], 
-            $row[0]["nome"], 
-            $row[0]["data_nasc"], 
-            $row[0]["id_curso"], 
-            $row[0]["cpf"]
+            $data[0]["id"], 
+            $data[0]["nome"], 
+            $data[0]["data_nasc"], 
+            $data[0]["id_curso"], 
+            $data[0]["cpf"],
+            $data[0]["nome_curso"]
         );
     }
 
@@ -54,7 +57,7 @@ final class AlunosModel extends Model {
             ":id_curso" => $vo->getIdCurso(),
             ":cpf" => $vo->getCpf()
         ];
-    
+        
         return $db->execute($query, $binds);
     }
     

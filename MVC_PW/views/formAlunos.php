@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Cadastro de Alunos</h1>
-    <a href="index.php">Voltar para a listagem</a>
+    <a href="alunos.php?destino=list">Voltar para a listagem</a>
     <form action="salvarAlunos.php" method="POST">
         <input type="hidden" name="id" value="<?php echo isset($aluno) ? $aluno->getId() : ''; ?>">
         
@@ -19,8 +19,24 @@
         <input type="date" name="data_nasc" id="data_nasc" value="<?php echo isset($aluno) ? $aluno->getDataNasc() : ''; ?>" required>
         <br>
 
-        <label for="id_curso">ID do Curso:</label>
-        <input type="number" name="id_curso" id="id_curso" value="<?php echo isset($aluno) ? $aluno->getIdCurso() : ''; ?>" placeholder="ID do curso" required>
+        <label for="id_curso">Cursos:</label>
+        <?php
+            use Model\CursosModel;
+            use Model\VO\CursosVO;
+
+            $model = new CursosModel();
+            $cursos = $model->selectAll(new CursosVO());
+        ?>
+        <select name="id_curso" required    >
+        <option value="" disabled selected>Escolha um curso:</option>
+            <?php foreach ($cursos as $curso): ?>
+                <option value="<?php echo $curso->getId(); ?>"
+                    <?php echo isset($aluno) && $aluno->getIdCurso() == $curso->getId() ? 'selected' : ''; ?>>
+                    <?php echo $curso->getNome(); ?>
+                </option>
+            <?php endforeach; ?>
+            
+        </select>
         <br>
 
         <label for="cpf">CPF:</label>

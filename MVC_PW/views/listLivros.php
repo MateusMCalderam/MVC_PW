@@ -7,8 +7,8 @@
 </head>
 <body>
     <h1>Listagem de Livros</h1>
-    <a href="livro.php">Incluir Nova</a>
-    <a href="./alunos.php">Ver Alunos</a>
+    <a href="livro.php?destino=form">Incluir Nova</a>
+    <a href="alunos.php?destino=list">Ver Alunos</a>
     
     <?php if (empty($livros)): ?>
         <p>Nenhum livro adicionado!</p>
@@ -16,7 +16,6 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Título</th>
                     <th>Autores</th>
                     <th>Editora</th>
@@ -29,7 +28,6 @@
             <tbody>
                 <?php foreach ($livros as $livro): ?>
                     <tr>
-                        <td><?php echo $livro->getId(); ?></td>
                         <td><?php echo $livro->getTitulo(); ?></td>
                         <td><?php echo $livro->getAutores(); ?></td>
                         <td><?php echo $livro->getEditora(); ?></td>
@@ -37,7 +35,7 @@
                         <td><?php echo $livro->getQuantidadeExemplares(); ?></td>
                         <td><?php echo $livro->getIsbn(); ?></td>
                         <td>
-                            <a href="livro.php?id=<?php echo $livro->getId(); ?>">Editar</a>
+                            <a href="livro.php?destino=form&id=<?php echo $livro->getId(); ?>">Editar</a>
                             <br>
                             <a href="excluirLivro.php?id=<?php echo $livro->getId(); ?>">Excluir</a>
                         </td>
