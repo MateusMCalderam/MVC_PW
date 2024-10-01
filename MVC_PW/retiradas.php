@@ -3,7 +3,7 @@
 require_once("config.php");
 require_once("vendor/autoload.php");
 
-$controller = new Controller\AlunosController();
+$controller = new Controller\RetiradasController();
 
 $destino = $_GET['destino'];
 
@@ -17,4 +17,3 @@ if (isset($destino)) {
     }
     else $controller->list();
 }
-

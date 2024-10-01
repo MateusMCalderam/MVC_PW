@@ -6,22 +6,24 @@
     <title>Sistema Biblioteca</title>
 </head>
 <body>
-    <h1>Cadastro de Alunos</h1>
+    <h1>Cadastro de Retiradas</h1>
     <?php
     echo "<pre>";
-    print_r($aluno->getNome());
+    print_r($retirada->getNomeAluno());
+    print_r($alunos);
     echo "</pre>";
     ?>
-    <a href="alunos.php?destino=list">Voltar para a listagem</a>
-    <form action="alunos.php?destino=save" method="POST">
-        <input type="hidden" name="id" value="<?php echo isset($aluno) ? $aluno->getId() : ''; ?>">
+    
+    <a href="retiradas.php?destino=list">Voltar para a listagem</a>
+    <form action="retiradas.php?destino=save" method="POST">
+        <input type="hidden" name="id" value="<?php echo isset($retirada) ? $retirada->getId() : ''; ?>">
         
         <label for="nome">Nome:</label>
-        <input type="text" name="nome" id="nome" value="<?php echo isset($aluno) ? $aluno->getNome() : ''; ?>" placeholder="Nome do aluno" required>
+        <input type="text" name="nome" id="nome" value="<?php echo isset($retirada) ? $retirada->getNome() : ''; ?>" placeholder="Nome do retirada" required>
         <br>
 
         <label for="data_nasc">Data de Nascimento:</label>
-        <input type="date" name="data_nasc" id="data_nasc" value="<?php echo isset($aluno) ? $aluno->getDataNasc() : ''; ?>" required>
+        <input type="date" name="data_nasc" id="data_nasc" value="<?php echo isset($retirada) ? $retirada->getDataNasc() : ''; ?>" required>
         <br>
 
         <label for="id_curso">Cursos:</label>
@@ -36,7 +38,7 @@
         <option value="" disabled selected>Escolha um curso:</option>
             <?php foreach ($cursos as $curso): ?>
                 <option value="<?php echo $curso->getId(); ?>"
-                    <?php echo isset($aluno) && $aluno->getIdCurso() == $curso->getId() ? 'selected' : ''; ?>>
+                    <?php echo isset($retirada) && $retirada->getIdCurso() == $curso->getId() ? 'selected' : ''; ?>>
                     <?php echo $curso->getNome(); ?>
                 </option>
             <?php endforeach; ?>
@@ -45,7 +47,7 @@
         <br>
 
         <label for="cpf">CPF:</label>
-        <input type="text" name="cpf" id="cpf" value="<?php echo isset($aluno) ? $aluno->getCpf() : ''; ?>" placeholder="CPF" required>
+        <input type="text" name="cpf" id="cpf" value="<?php echo isset($retirada) ? $retirada->getCpf() : ''; ?>" placeholder="CPF" required>
         <br>
 
         <button type="submit">Salvar</button>

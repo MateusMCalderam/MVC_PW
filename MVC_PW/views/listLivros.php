@@ -9,6 +9,7 @@
     <h1>Listagem de Livros</h1>
     <a href="livro.php?destino=form">Incluir Nova</a>
     <a href="alunos.php?destino=list">Ver Alunos</a>
+    <a href="retiradas.php?destino=list">Ver Retiradas</a>
     
     <?php if (empty($livros)): ?>
         <p>Nenhum livro adicionado!</p>
@@ -37,7 +38,7 @@
                         <td>
                             <a href="livro.php?destino=form&id=<?php echo $livro->getId(); ?>">Editar</a>
                             <br>
-                            <a href="excluirLivro.php?id=<?php echo $livro->getId(); ?>">Excluir</a>
+                            <a href="livro.php?destino=remove&id=<?php echo $livro->getId(); ?>">Excluir</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

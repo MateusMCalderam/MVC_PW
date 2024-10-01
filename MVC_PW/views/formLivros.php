@@ -8,7 +8,7 @@
 <body>
     <h1>Cadastro de Livros</h1>
     <a href="index.php">Voltar para a listagem</a>
-    <form action="salvarLivros.php" method="POST">
+    <form action="livro.php?destino=save" method="POST">
         <input type="hidden" name="id" value="<?php echo isset($livro) ? $livro->getId() : ''; ?>">
         
         <label for="titulo">Título:</label>
