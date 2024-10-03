@@ -7,6 +7,11 @@
 </head>
 <body>
     <h1>Cadastro de Retiradas de Livros</h1>
+    <?php
+        if (isset($_GET['erro'])) {
+            echo "<p>".$_GET['erro']."</p>";
+        }
+    ?>
     <a href="retiradas.php?destino=list">Voltar para a listagem</a>
     <form action="retiradas.php?destino=save" method="POST">
         <input type="hidden" name="id" value="<?php echo $retirada->getId() !== null ? $retirada->getId() : ''; ?>">

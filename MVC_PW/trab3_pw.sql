@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24/09/2024 às 14:01
--- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.2.4
+-- Tempo de geração: 03/10/2024 às 19:39
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,6 +35,17 @@ CREATE TABLE `alunos` (
   `cpf` varchar(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `alunos`
+--
+
+INSERT INTO `alunos` (`id`, `nome`, `data_nasc`, `id_curso`, `cpf`) VALUES
+(1, 'João Silva', '2005-04-12', 1, '123.456.789'),
+(2, 'Maria Oliveira', '2006-07-22', 2, '987.654.321'),
+(3, 'Carlos Pereira', '2005-11-10', 3, '456.789.123'),
+(4, 'Ana Santos', '2007-05-18', 4, '789.123.456'),
+(5, 'Bruna Costa', '2004-01-30', 5, '321.654.987');
+
 -- --------------------------------------------------------
 
 --
@@ -45,6 +56,20 @@ CREATE TABLE `cursos` (
   `id` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `cursos`
+--
+
+INSERT INTO `cursos` (`id`, `nome`) VALUES
+(1, 'Matemática'),
+(2, 'Português'),
+(3, 'História'),
+(4, 'Geografia'),
+(5, 'Ciências'),
+(6, 'Educação Física'),
+(7, 'Artes'),
+(8, 'Inglês');
 
 -- --------------------------------------------------------
 
@@ -67,7 +92,8 @@ CREATE TABLE `livros` (
 --
 
 INSERT INTO `livros` (`id`, `titulo`, `autores`, `editora`, `ano_publicacao`, `quantidade_exemplares`, `isbn`) VALUES
-(3, 'O Senhor dos Anéis', 'J.R.R. Tolkien', 'HarperCollins', '1954', 10, '9780261102385');
+(3, 'O Senhor dos Anéis', 'J.R.R. Tolkien', 'HarperCollins', '1954', 10, '9780261102385'),
+(4, 'aaaaaa', 'aaaa', 'aaa', '0000', -4, '123456789');
 
 -- --------------------------------------------------------
 
@@ -82,6 +108,13 @@ CREATE TABLE `retiradas` (
   `data_retirada` date NOT NULL,
   `data_devolucao` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `retiradas`
+--
+
+INSERT INTO `retiradas` (`id`, `id_aluno`, `id_livro`, `data_retirada`, `data_devolucao`) VALUES
+(1, 1, 3, '2024-10-03', '2024-10-10');
 
 --
 -- Índices para tabelas despejadas
@@ -123,25 +156,25 @@ ALTER TABLE `retiradas`
 -- AUTO_INCREMENT de tabela `alunos`
 --
 ALTER TABLE `alunos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `livros`
 --
 ALTER TABLE `livros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `retiradas`
 --
 ALTER TABLE `retiradas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restrições para tabelas despejadas
