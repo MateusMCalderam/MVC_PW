@@ -6,6 +6,8 @@ use Model\RetiradasModel;
 use Model\VO\RetiradasVO;
 use Model\AlunosModel;
 use Model\VO\AlunosVO;
+use Model\LivrosModel;
+use Model\VO\LivrosVO;
 
 final class RetiradasController extends Controller {
 
@@ -21,22 +23,27 @@ final class RetiradasController extends Controller {
     public function form() {
         $id = $_GET["id"] ?? 0;
 
+        $modelAlunos = new AlunosModel();
+        $voAlunos = new AlunosVO();
+        $alunos = $modelAlunos->selectAll($voAlunos);
+        
+        $modelLivros = new LivrosModel();
+        $voLivros = new LivrosVO();
+        $livros = $modelLivros->selectAll($voLivros);
+    
         if(!empty($id)) {
             $modelRetirada = new RetiradasModel();
             $voRetirada = new RetiradasVO($id);
             $retirada = $modelRetirada->selectOne($voRetirada);
 
-            $modelAlunos = new AlunosModel();
-            $voAlunos = new AlunosVO();
-            $alunos = $modelAlunos->selectAll($voAlunos);
         } else {
             $retirada = new RetiradasVO();
-            $alunos = new AlunosVO();
         }
 
         $this->loadView("formRetiradas", [
             "retirada" => $retirada,
-            "alunos" => $alunos
+            "alunos" => $alunos,
+            "livros" => $livros
         ]);
     }
 
