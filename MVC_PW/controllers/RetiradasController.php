@@ -49,12 +49,20 @@ final class RetiradasController extends Controller {
 
     public function save() {
         $id = $_POST["id"];
+
+
+        date_default_timezone_set('America/Sao_Paulo');
+    
+        $data_retirada = date($_POST["data_retirada"]);  
+        $qtdDias = 7;
+        $data_devolucao = date('Y-m-d', strtotime("+{$qtdDias} days", strtotime($data_retirada)));
+        
         $vo = new RetiradasVO(
             $_POST["id"],
-            $_POST["nome"],
-            "",
-            $_POST["id_curso"],
-            $_POST["cpf"]
+            $_POST["id_aluno"],
+            $_POST["id_livro"],
+            $data_retirada,
+            $data_devolucao
         );
         
         print_r($vo);
@@ -66,9 +74,9 @@ final class RetiradasController extends Controller {
             $result = $model->update($vo);
         }
         var_dump($result)   ;
-        // $this->redirect("retiradas.php?destino=list");
-
+        $this->redirect("retiradas.php?destino=list");
     }
+    
 
     public function remove() {
         $vo = new RetiradasVO($_GET["id"]);

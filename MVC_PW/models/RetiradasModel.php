@@ -8,10 +8,10 @@ final class RetiradasModel extends Model {
 
     public function selectAll($vo) {
         $db = new Database();
-        $query = "SELECT r.id, r.id_aluno, r.id_livro, r.data_retirada, r.data_devolucao, l.titulo AS nome_livro, a.nome AS nome_aluno 
-        FROM retiradas r
-        JOIN livros l ON l.id = r.id_livro
-        JOIN alunos a ON a.id = r.id_aluno";
+        $query = "SELECT retiradas.id, retiradas.id_aluno, retiradas.id_livro, retiradas.data_retirada, retiradas.data_devolucao, livros.titulo as nome_livro, alunos.nome as nome_aluno 
+        FROM retiradas 
+        JOIN livros ON livros.id = retiradas.id_livro 
+        JOIN alunos ON alunos.id = retiradas.id_aluno ";
 
         $data = $db->select($query);
         $arrayDados = [];
@@ -34,9 +34,11 @@ final class RetiradasModel extends Model {
 
     public function selectOne($vo) {
         $db = new Database();
-        $query = "SELECT r.id, r.id_aluno, r.id_livro, r.data_retirada, r.data_devolucao, l.nome as nome_livro, a.nome as nome_aluno FROM retiradas r
-        JOIN livros l ON l.id = r.id_livro
-        JOIN alunos a ON l.id = r.id_aluno WHERE a.id = :id";
+        $query = "SELECT retiradas.id, retiradas.id_aluno, retiradas.id_livro, retiradas.data_retirada, retiradas.data_devolucao, livros.titulo as nome_livro, alunos.nome as nome_aluno 
+        FROM retiradas 
+        JOIN livros ON livros.id = retiradas.id_livro 
+        JOIN alunos ON alunos.id = retiradas.id_aluno 
+        WHERE retiradas.id = :id;";
         $binds = [":id" => $vo->getId()];
         $data = $db->select($query, $binds);
 
@@ -53,18 +55,13 @@ final class RetiradasModel extends Model {
 
     public function insert($vo) {
         $db = new Database();
-
-        date_default_timezone_set('GMT-3');
-        $today = date("Y/m/d");  
-
-
         $query = "INSERT INTO retiradas (id_aluno, id_livro, data_retirada, data_devolucao) 
                   VALUES (:id_aluno, :id_livro, :data_retirada, :data_devolucao)";
         
         $binds = [
             ":id_aluno" => $vo->getIdAluno(),
             ":id_livro" => $vo->getIdLivro(),
-            ":data_retirada" => $today,
+            ":data_retirada" => $vo->getDataRetirada(),
             ":data_devolucao" => $vo->getDataDevolucao()
         ];
 
@@ -75,15 +72,15 @@ final class RetiradasModel extends Model {
     
     public function update($vo) {
         $db = new Database();
-        $query = "UPDATE alunos 
-                  SET nome = :nome, data_nasc = :data_nasc, id_curso = :id_curso, cpf = :cpf
+        $query = "UPDATE retiradas 
+                  SET id_aluno = :id_aluno, id_livro = :id_livro, data_retirada = :data_retirada, data_devolucao = :data_devolucao
                   WHERE id = :id";
     
         $binds = [
-            ":nome" => $vo->getNome(),
-            ":data_nasc" => $vo->getDataNasc(),
-            ":id_curso" => $vo->getIdCurso(),
-            ":cpf" => $vo->getCpf(),
+            ":id_aluno" => $vo->getIdAluno(),
+            ":id_livro" => $vo->getIdLivro(),
+            ":data_retirada" => $vo->getDataRetirada(),
+            ":data_devolucao" => $vo->getDataDevolucao(),
             ":id" => $vo->getId()
         ];
     
@@ -92,7 +89,7 @@ final class RetiradasModel extends Model {
     
     public function delete($vo) {
         $db = new Database();
-        $query = "DELETE FROM alunos WHERE id = :id";
+        $query = "DELETE FROM retiradas WHERE id = :id";
         $binds = [":id" => $vo->getId()];
         
         return $db->execute($query, $binds);

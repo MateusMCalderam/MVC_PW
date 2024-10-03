@@ -32,7 +32,7 @@
                         <td>
                             <a href="alunos.php?destino=form&id=<?php echo $aluno->getId(); ?>">Editar</a>
                             <br>
-                            <a href="excluirAluno.php?destino=remove&id=<?php echo $aluno->getId(); ?>">Excluir</a>
+                            <a href="alunos.php?destino=remove&id=<?php echo $aluno->getId(); ?>">Excluir</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

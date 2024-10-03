@@ -33,6 +33,38 @@ final class LivrosController extends Controller {
     }
 
     public function save() {
+        $erro = ""
+        if (
+            empty($_POST["titulo"]) ||
+            empty($_POST["autores"]) ||
+            empty($_POST["editora"]) ||
+            empty($_POST["ano_publicacao"]) ||
+            empty($_POST["quantidade_exemplares"]) ||
+            empty($_POST["isbn"])
+        ) {
+            echo "Erro: Todos os campos são obrigatórios!";
+            return;
+        }
+        $isbnLength = strlen($_POST["isbn"]);
+        if ($isbnLength !== 10 && $isbnLength !== 13) {
+            echo "Erro: O ISBN deve ter 10 ou 13 caracteres!";
+            return;
+        }
+    
+        // Verifica se a quantidade de exemplares é um número válido e maior ou igual a 0
+        if (!is_numeric($_POST["quantidade_exemplares"]) || $_POST["quantidade_exemplares"] < 0) {
+            echo "Erro: A quantidade de exemplares deve ser um número válido e maior ou igual a 0!";
+            return;
+        }
+    
+        // Verifica se o ano de publicação tem exatamente 4 caracteres
+        if (strlen($_POST["ano_publicacao"]) !== 4 || !is_numeric($_POST["ano_publicacao"])) {
+            echo "Erro: O ano de publicação deve ter exatamente 4 dígitos!";
+            return;
+        }
+
+
+
         print_r($_POST);
         $id = $_POST["id"];
         $vo = new LivrosVO(

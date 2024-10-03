@@ -11,7 +11,7 @@ final class RetiradasVO extends VO {
     private $data_retirada;
     private $data_devolucao;
     
-    public function __construct($id = 0, $id_aluno = "", $id_livro = 0, $data_retirada = "", $data_devolucao = "", $nome_aluno = "", $nome_livro = "") {
+    public function __construct($id = 0, $id_aluno = 0, $id_livro = 0, $data_retirada = null, $data_devolucao = null, $nome_aluno = "", $nome_livro = "") {
         parent::__construct($id);
         $this->id_aluno = $id_aluno;
         $this->id_livro = $id_livro;

@@ -7,11 +7,6 @@
 </head>
 <body>
     <h1>Cadastro de Alunos</h1>
-    <?php
-    echo "<pre>";
-    print_r($aluno->getNome());
-    echo "</pre>";
-    ?>
     <a href="alunos.php?destino=list">Voltar para a listagem</a>
     <form action="alunos.php?destino=save" method="POST">
         <input type="hidden" name="id" value="<?php echo isset($aluno) ? $aluno->getId() : ''; ?>">

@@ -32,9 +32,9 @@
                         <td><?php echo $retirada->getDataRetirada(); ?></td>
                         <td><?php echo $retirada->getDataDevolucao(); ?></td>
                         <td>
-                            <a href="retirada.php?destino=form&id=<?php echo $retirada->getId(); ?>">Editar</a>
+                            <a href="retiradas.php?destino=form&id=<?php echo $retirada->getId(); ?>">Editar</a>
                             <br>
-                            <a href="retirada.php?destino=remove&id=<?php echo $retirada->getId(); ?>">Excluir</a>
+                            <a href="retiradas.php?destino=remove&id=<?php echo $retirada->getId(); ?>">Excluir</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
